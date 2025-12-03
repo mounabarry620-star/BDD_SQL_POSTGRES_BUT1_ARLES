@@ -1,5 +1,6 @@
 create schema TP1_bd_voyage;
-set search_path=TP1_bd_voyage;
+GO
+--set search_path=TP1_bd_voyage;
 
 
 CREATE TABLE VOYAGE (
@@ -58,7 +59,7 @@ CONSTRAINT FK_CARAC_IDV FOREIGN KEY (IDV) REFERENCES VOYAGE (IDV) ,
 CONSTRAINT FK_CARAC_CODE FOREIGN KEY (CODE) REFERENCES OPTIONV (CODE) );
 
 /************************/
-/* Création des voyages */
+/* Crï¿½ation des voyages */
 /************************/
 
 INSERT INTO VOYAGE VALUES (867, 'LISBONNE', 'PORTUGAL', 'MARSEILLE', 'MONDIAL', 3, 2);
@@ -85,7 +86,7 @@ INSERT INTO VOYAGE VALUES (201, 'AGADIR', 'MAROC', 'TOULOUSE', 'TRANSATLANTIQUE'
 INSERT INTO VOYAGE VALUES (202, 'NAIROBI', 'KENYA', 'TOULOUSE', 'TRANSATLANTIQUE', 4, 6);
 
 /************************/
-/* Création des plannings*/
+/* Crï¿½ation des plannings*/
 /************************/
 
 INSERT INTO PLANNING VALUES (100, TO_DATE ('04/05/04', 'DD/MM/YY'), 470);
@@ -170,7 +171,7 @@ INSERT INTO PLANNING VALUES (869, TO_DATE ('07/08/04', 'DD/MM/YY'), 315);
 
 
 /************************/
-/* Création des options */
+/* Crï¿½ation des options */
 /************************/
 
 INSERT INTO OPTIONV VALUES (10, 'VISITE GUIDEE');
@@ -188,7 +189,7 @@ INSERT INTO OPTIONV VALUES (24, 'JACUZZI');
 
 
 /************************/
-/* Création des carac */
+/* Crï¿½ation des carac */
 /************************/
 
 INSERT INTO CARAC VALUES (354, 16, 36);
@@ -229,7 +230,7 @@ INSERT INTO CARAC VALUES (860, 13, NULL);
 INSERT INTO CARAC VALUES (860, 23, NULL);
 
 /************************/
-/* Création des clients */
+/* Crï¿½ation des clients */
 /************************/
 
 INSERT INTO CLIENT VALUES (2101, 'BARBIER', 'NICOLAS', '12 RUE DU CHERCHE MIDI', '75008', 'PARIS', NULL);
@@ -269,7 +270,7 @@ INSERT INTO CLIENT VALUES (2304, 'DUJARDIN', 'FRANCOIS', NULL, NULL, 'AIX', 'PRI
 
 
 /*****************************/
-/* Création des réservations */
+/* Crï¿½ation des rï¿½servations */
 /*****************************/
 
 INSERT INTO RESERVATION VALUES (2107, 122, TO_DATE ('20/06/04', 'DD/MM/YY'), 2, TO_DATE ('25/03/04', 'DD/MM/YY'));
@@ -305,6 +306,11 @@ INSERT INTO RESERVATION VALUES (2201, 869, TO_DATE ('07/08/04', 'DD/MM/YY'), 1, 
 INSERT INTO RESERVATION VALUES (2202, 869, TO_DATE ('07/08/04', 'DD/MM/YY'), 1, TO_DATE ('25/06/04', 'DD/MM/YY'));
 INSERT INTO RESERVATION VALUES (2203, 867, TO_DATE ('15/05/04', 'DD/MM/YY'), 1, TO_DATE ('23/03/04', 'DD/MM/YY'));
 
+
+--RequÃªte TP1
+--1.1. Donner la liste des clients ;
+
+SELECT * FROM CLIENT;
 
 
 
