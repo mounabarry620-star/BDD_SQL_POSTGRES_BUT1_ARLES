@@ -307,10 +307,52 @@ INSERT INTO RESERVATION VALUES (2202, 869, TO_DATE ('07/08/04', 'DD/MM/YY'), 1, 
 INSERT INTO RESERVATION VALUES (2203, 867, TO_DATE ('15/05/04', 'DD/MM/YY'), 1, TO_DATE ('23/03/04', 'DD/MM/YY'));
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --Requête TP1
 --1.1. Donner la liste des clients ;
 
 SELECT * FROM CLIENT;
 
+--1.2. Donner la liste des clients PRIVILEGIE (catégorie);
+SELECT * FROM CLIENT
+WHERE CATEGORIE = 'PRIVILEGIE';
 
+--1.3. Donner le nom et prénom des clients qui habitent MARSEILLE
+SELECT NOM, PRENOM FROM CLIENT
+WHERE VILLE = 'MARSEILLE';
 
+--1.4. Donner le nom des clients dont le prénom contient un R et qui habitent MARSEILLE;
+SELECT NOM FROM CLIENT
+WHERE VILLE = 'MARSEILLE' AND PRENOM LIKE '%R%';
+
+--1.5. Donner le numéro de client (numcl) et l'identifiant du voyage (idv) des réservations pour
+--lesquelles la date de réservation est comprise entre mars 2003 et janvier 2004 (bornes
+--incluses
+SELECT NUMCL, IDV FROM RESERVATION
+WHERE DATERES BETWEEN  '2003-03-01' AND '2004-01-31';
