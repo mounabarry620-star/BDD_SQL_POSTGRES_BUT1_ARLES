@@ -388,4 +388,104 @@ SELECT NUMCL, NOM FROM CLIENT
 WHERE ADRESSE IS NULL;
 
 
-TP 1-2 
+--TP 1-2 Interrogation de donnees sous Postgresql
+
+--1.1. Quels sont les voyages (identifiant et destination) dont le tarif est le plus faible ?
+SELECT DISTINCT P.IDV, V.PAYSARR FROM VOYAGE V
+JOIN PLANNING P ON V.IDV = P.IDV
+WHERE P.TARIF = (SELECT MIN(TARIF) FROM PLANNING);
+
+--1.2. Pour quelle destination part le voyage le plus cher ?
+SELECT DISTINCT V.VILLEARR, V.PAYSARR FROM VOYAGE V
+JOIN PLANNING P ON V.IDV = P.IDV
+WHERE P.TARIF = (SELECT MAX(TARIF) FROM PLANNING);
+
+--1.3. Quelles sont les villes de départ des voyages correspondant à une ville dans
+--laquelle résident des clients ? Donner deux formulations possibles
+SELECT DISTINCT V.VILLEDEP FROM VOYAGE V
+JOIN CLIENT C ON V.VILLEDEP = C.VILLE;
+
+SELECT DISTINCT V.VILLEDEP FROM VOYAGE V
+WHERE V.VILLEDEP IN (SELECT VILLE FROM CLIENT);
+
+--1.4. Quel est le libellé des options communes aux voyages 354 et 952 ? Donner deux
+--formulations possibles
+SELECT O.LIBELLE FROM OPTIONV O
+JOIN CARAC C1 ON O.CODE = C1.CODE
+JOIN CARAC C2 ON O.CODE = C2.CODE
+WHERE C1.IDV = 354 AND C2.IDV = 952;
+
+SELECT O.LIBELLE FROM OPTIONV O
+WHERE O.CODE IN (SELECT CODE FROM CARAC WHERE IDV = 354)
+AND O.CODE IN (SELECT CODE FROM CARAC WHERE IDV = 952);
+
+--1.5. Existe-t-il des voyages, identifiant et destination (ville et pays d'arrivée), pour
+--lesquels il n'y a aucune réservation ? Donner trois formulations possibles
+SELECT V.IDV, V.VILLEARR, V.PAYSARR FROM VOYAGE V
+LEFT JOIN RESERVATION R ON V.IDV = R.IDV
+WHERE R.IDV IS NULL;
+
+SELECT V.IDV, V.VILLEARR, V.PAYSARR FROM VOYAGE V
+WHERE NOT EXISTS (SELECT * FROM RESERVATION R WHERE V.IDV = R.IDV);
+
+SELECT V.IDV, V.VILLEARR, V.PAYSARR FROM VOYAGE V
+WHERE V.IDV NOT IN (SELECT IDV FROM RESERVATION);
+
+--1.6. Quelles sont les options (libellé) gratuites pour le voyage 354 ou celles qui sont
+--payantes pour le voyage 952 ? donner deux formulations possibles
+SELECT O.LIBELLE FROM OPTIONV O
+JOIN CARAC C ON O.CODE = C.CODE
+WHERE (C.IDV = 354 AND C.PRIX IS NULL)
+OR (C.IDV = 952 AND C.PRIX IS NOT NULL);  
+
+SELECT O.LIBELLE FROM OPTIONV O
+WHERE (O.CODE IN (SELECT CODE FROM CARAC WHERE IDV = 354 AND PRIX IS NULL))
+OR (O.CODE IN (SELECT CODE FROM CARAC WHERE IDV = 952 AND PRIX IS NOT NULL));
+
+--1.7. Quels sont les voyages (identifiant et destination) offrant à la fois les options VISITE
+--GUIDEE et PISCINE ? Donner deux formulations possibles
+SELECT DISTINCT V.IDV, V.PAYSARR FROM VOYAGE V
+JOIN CARAC C1 ON V.IDV = C1.IDV
+JOIN OPTIONV O1 ON C1.CODE = O1.CODE
+JOIN CARAC C2 ON V.IDV = C2.IDV
+JOIN OPTIONV O2 ON C2.CODE = O2.CODE
+WHERE O1.LIBELLE = 'VISITE GUIDEE' AND O2.LIBELLE = 'PISCINE';
+
+SELECT DISTINCT V.IDV, V.PAYSARR FROM VOYAGE V
+WHERE V.IDV IN (SELECT IDV FROM CARAC WHERE CODE IN (SELECT CODE FROM OPTIONV WHERE LIBELLE = 'VISITE GUIDEE'))
+AND V.IDV IN (SELECT IDV FROM CARAC WHERE CODE IN (SELECT CODE FROM OPTIONV WHERE LIBELLE = 'PISCINE'));
+
+--1.8. Existe-t-il des clients, si oui donnez leur nom et prénom, qui n'ont aucune
+--réservation ? Donner deux formulations possibles
+SELECT C.NOM, C.PRENOM FROM CLIENT C
+LEFT JOIN RESERVATION R ON C.NUMCL = R.NUMCL
+WHERE R.NUMCL IS NULL;
+
+SELECT C.NOM, C.PRENOM FROM CLIENT C
+WHERE NOT EXISTS (SELECT * FROM RESERVATION R WHERE C.NUMCL = R.NUMCL);
+
+--1.9. Quelles sont les destinations (ville, pays) qui ne sont pas proposées au départ de
+--Marseille ?
+SELECT DISTINCT VILLEARR, PAYSARR FROM VOYAGE
+WHERE VILLEDEP != 'Marseille';
+
+--1.10. Quelles sont les options (code et libellé) qui ne sont pas proposées dans les
+--voyages pour Chypre ?
+SELECT O.CODE, O.LIBELLE FROM OPTIONV O
+WHERE O.CODE NOT IN (SELECT CODE FROM CARAC WHERE IDV IN (SELECT IDV FROM VOYAGE WHERE PAYSARR = 'Chypre'));
+
+--1.11. Donnez la liste des hôtels ayant le plus d’étoiles
+SELECT HOTEL FROM VOYAGE
+WHERE NBETOILES = (SELECT MAX(NBETOILES) FROM VOYAGE);
+
+--1.12. Donnez la liste des pays n’ayant pas d’hôtel avec le plus grand nombre d’étoiles.
+SELECT DISTINCT PAYSARR FROM VOYAGE
+WHERE NBETOILES != (SELECT MAX(NBETOILES) FROM VOYAGE);
+
+--1.13. Pour chaque pays ayant au moins un hôtel 5 étoiles, donner le nombre total d’hôtels
+--(quel que soit leur nombre d’étoiles).
+SELECT PAYSARR, COUNT(*) AS NOMBRE_HOTELS FROM VOYAGE
+WHERE PAYSARR IN (SELECT PAYSARR FROM VOYAGE WHERE NBETOILES = 5)
+GROUP BY 1
+ORDER BY 2 ;
+
