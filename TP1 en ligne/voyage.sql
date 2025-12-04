@@ -356,3 +356,36 @@ WHERE VILLE = 'MARSEILLE' AND PRENOM LIKE '%R%';
 --incluses
 SELECT NUMCL, IDV FROM RESERVATION
 WHERE DATERES BETWEEN  '2003-03-01' AND '2004-01-31';
+
+--1.6. donner l'identifiant du voyage (idv) et la durée des voyages qui ont comme destination le
+--MAROC ou que l'hôtel est le ANTIQUE
+SELECT IDV, DUREE FROM VOYAGE
+WHERE DESTINATION = 'MAROC' OR HOTEL = 'ANTIQUE';
+
+--1.7. Quelles sont les villes d'arrivée des voyages à destination du Maroc ?
+SELECT VILLEARRIVEE FROM VOYAGE
+WHERE DESTINATION = 'MAROC';
+
+--1.8. Donnez toutes les informations sur les options dont le libellé comporte le mot VISITE.
+SELECT * FROM OPTIONV
+WHERE LIBELLE LIKE '%VISITE%';
+
+--1.9. Donnez la liste, triée en ordre croissant, des dates de départ plannifiées (pour le voyage
+--d'identifiant 927 entre le 1er juin et le 30 juillet 2004
+SELECT DATEDEP FROM PLANNING
+WHERE IDV = 927 AND DATEDEP BETWEEN '2004-06-01' AND '2004-07-30'
+ORDER BY DATEDEP ;
+
+--1.10. Donnez la liste des clients (leur identifiant, nom et prénom) n'habitant ni Paris ni Marseille.
+--Présentez cette liste triée selon l'identifiant.
+SELECT NUMCL, NOM, PRENOM FROM CLIENT
+WHERE VILLE NOT IN ('PARIS', 'MARSEILLE')
+ORDER BY NUMCL;
+
+--1.11. Quels sont les clients (identifiant et nom) dont l'adresse n'est pas valorisée dans la base
+--(pas de valeur) ?
+SELECT NUMCL, NOM FROM CLIENT
+WHERE ADRESSE IS NULL;
+
+
+TP 1-2 
