@@ -1,0 +1,167 @@
+
+
+Panneau latéral
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IUT
+
+Info Arles
+
+Réalisation d'applications : conception, développement, validation
+
+[25-26]-S1-R1.01- init. prog.
+
+Lecture et écriture de fichiers
+
+TP 19 : Lecture structurée et exports CSV et HTML (exo4) (sujet)
+
+
+
+TP 19 : Lecture structurée et exports CSV et HTML (exo4) (sujet)
+
+Conditions d’achèvement
+
+
+
+Le travail doit être réalisé seul. Les documents (cours, TD, TP, recherches Google...) sont autorisés. La communication avec un individu ou un système d'Intelligence Artificielle est interdite. Tout travail rendu est susceptible de donner lieu à un oral de contrôle pour vérifier que l'étudiant maîtrise les éléments utilisés dans son rendu sous peine de voir la note modifiée en conséquence.
+
+Exercice 4
+
+Considérez la structure suivante :
+
+struct Fiche { string nom,prenom; double taille; bool fille; string commentaire; string image;};
+
+Elle représente une fiche personnelle simplifiée permettant de constituer un annuaire. Les champs permettent de mémoriser le nom, le prénom, la taille en mètre, un booléen qui indique si la personne est une fille, un commentaire textuel libre et un nom de fichier contenant une photo de la personne.
+
+Téléchargez le fichier [exo4.zip] et décompressez-le dans votre répertoire de travail. Il contient, dans un répertoire « exo4 », un exemple initial de fichier texte d'annuaire ainsi que quelques photos. Ouvrez le fichier « MonAnnuaire.txt » pour étudier sa structure. Pour chaque fiche, vous trouverez :
+
+une ligne entière comportant le nom de la personne ;
+
+une ligne entière comportant le prénom de la personne ;
+
+sur une même ligne, la taille en mètre (un réel) puis un caractère H ou F suivant que la personne est un homme ou une femme ;
+
+une ligne formant la totalité du commentaire ;
+
+une ligne comportant le nom du fichier d'image servant de photo d'identité.
+
+Ouvrez le squelette de programme « exo4.cpp » fourni. Vous devez remplir les fonctions contenant des points de suspension afin qu'il permette de charger un annuaire en mémoire à partir de son fichier. Vous ne devez sous aucun prétexte changer le prototype des fonctions à compléter ni le nom de la structure. Si vous le faites, le code de correction qui cherchera à se servir de ces fonctions ne les trouvera pas et tous les éléments de correction rateront systématiquement. Seules les fonctions à compléter seront corrigées et notées. Vous pouvez réaliser des fonctions supplémentaires mais elles ne seront utilisées que si vous les déclenchez dans les fonctions qui sont corrigées. Vous pouvez commenter temporairement la fonction main() fournie si vous le souhaitez pour faire vos propres tests : elle n'intervient pas dans la correction.
+
+ 
+
+Le fichier devra impérativement être en état de compiler avec les options « -Wall -Wfatal-errors » sous peine d'obtenir 0/20. Si vous rendez un fichier qui ne compile pas, ce qui n'est pas admissible pour un exercice noté de TP, vous aurez très probablement 0/20. Autrement dit, il vaut mieux que vous fassiez moins de choses qui marchent que d'ajouter n'importe comment un truc qui casse tout.
+
+ 
+
+Vous devez compléter la fonction « istream&
+
+chargeUneFiche(istream&,Fiche&) » qui charge les données d'une unique fiche à partir du flux passé en premier paramètre et qui les stocke dans les champs du deuxième paramètre (la fiche passée par référence). La référence au flux doit être renvoyée comme valeur de retour de la fonction. C'est ce qui vous permettra de tester dans une condition que la lecture a réussi (cf. ligne 11 de l'exemple de la section « L'opérateur >> » du PDF). Vous devez ensuite réaliser la fonction « void
+
+chargeAnnuaire(const vector<Fiche>& annuaire,fs::path& fname) » qui permet de charger le fichier d'annuaire entier à partir du chemin du fichier indiqué en deuxième paramètre. Le stockage se fait dans l'annuaire reçu en premier paramètre. Pour l'algorithme, faites comme lors des deux premiers exercices : tant qu'il a été possible de lire une fiche (grâce à « chargeUneFiche() »), il faut l'ajouter à l'annuaire. Si le fichier ne peut être trouvé et ouvert, la fonction devra lancer (avec l'instruction throw) une exception de type std::string avec le message « Fichier introuvable ».
+
+ 
+
+La fonction « ostream& afficheUneFiche(ostream& ofs,const
+
+Fiche& f) » vous est fournie. Elle écrit sur le flux ofs le contenu de la fiche f d'une façon humainement lisible, par exemple ainsi :
+
+Nom : Remy, Eric
+
+1.73m Homme
+
+Commentaire : Enseignant-chercheur au LIS (UMR 7020), équipe G-MOD
+
+Fichier image : er.jpg
+
+Ou encore :
+
+Nom : Szafrajzen, Barbara
+
+1.70m Femme
+
+Commentaire : Maîtresse de conférences HDR en sciences de l’information et de la communication (71ème section CNU)
+
+Fichier image : bs.jpg
+
+La fonction renvoie le flux ofs lorsqu'elle se termine (vous n'aurez pas de nécessité de faire cela dans ce TP mais cela sera une bonne habitude pour le second semestre où on verra comment ajouter de nouveaux opérateurs >> et << ; ce sera alors obligatoire). Ajoutez ensuite à votre programme l'affichage de l'annuaire entier grâce à la fonction « ostream&
+
+afficheAnnuaire(const vector<Fiche>& annuaire,ostream&
+
+ofs) ». Effectuez cet affichage en numérotant pour l'affichage chaque fiche dans l'ordre du vecteur à partir de 1. Vérifiez que toutes les fiches sont correctement lues.
+
+ 
+
+Complétez maintenant la fonction « ostream&
+
+sauveUneFiche(ostream& ofs,const Fiche& f) » qui effectue l'écriture d'une unique fiche au format exact proposé (relire au besoin le début du sujet). Grâce à la fonction précédente, complétez la fonction « void sauveAnnuaire(const vector<Fiche>& annuaire,fs::path&
+
+nom_fichier)  » qui permet de sauvegarder l'intégralité de l'annuaire à la fin du programme. Le but est ainsi que l'annuaire soit sauvegardé à la fin de l'exécution du programme puis rechargé lors de l'exécution suivante. Remarque : si vous souhaitez quitter sans sauvegarder, vous pouvez faire le choix 'Q' au lieu de 'q'.
+
+ 
+
+Exportation au format CSV
+
+Le format CSV pour Comma-separated Values (cf. Wikipédia) (valeurs séparées par des virgules) est un format très simple pour exporter des données sous forme de tableau. Un fichier respectant cette structure peut facilement être importé ou exporté dans Excel ou LibreOffice. Vous devez savoir écrire (et si possible relire) par un programme un tel format pour le jour où vous en aurez besoin !
+
+Un fichier CSV, comme le fichier « exemple1.csv » qui se trouve dans exo4.zip que vous avez téléchargé, contient un ensemble de lignes de texte. Chaque ligne du fichier correspond à une ligne dans votre tableur. Les valeurs qui vont dans chaque colonne du tableur sont séparées dans le fichier par un caractère virgule (','). Les valeurs numériques sont écrites au format anglo-saxon (avec un point comme séparateur décimal et non une virgule). Les chaînes de caractères doivent être écrites entre guillemets anglaises : « " ». Pour obtenir ce caractère dans une chaîne C++, vous devez le protéger avec un backslash : « "Voici un caractère guillemet \" dans une chaine C++ !" ».
+
+Pour donner les titres des colonnes, il n'y a pas de subtilité : il suffit d'écrire en premier, dans le fichier, une première ligne avec les titres textuels (donc chacun entre guillemets anglaises, séparées par des virgules). Merci d'utiliser (exactement) les titres suivants : « Nom », « Prénom », « Taille », « Genre », « Commentaire » et « Image ». Pour indiquer le genre de la personne, vous écrirez comme valeur soit la lettre « H », soit la lettre « F ».
+
+ 
+
+En tenant compte des indications précédentes et sur le même principe que pour les fonctions de sauvegarde de fiche et d'annuaire, complétez les deux fonctions :
+
+« ostream& exporteUneFicheCSV(ostream& ofs,const
+
+Fiche& f) » qui écrit une fiche sur une ligne au format CSV et sa reste une partie du genre importer vers le HTLM avec l'entête du fichier html :
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Titre de la page</title>
+  <meta name="description" content="Courte description de la page (150–160 caractères).">
+  <link rel="icon" href="/favicon.ico">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+  <!-- <script defer src="/script.js"></script> -->
+</head>
+</html>
+
+mais j'ai impeu oublié donc à toi de voir ça.
+
+Alors ça c'est le contrôle en c++ que j'ai eu à faire donc essaye de compléter le code dans le fichier exo4.cpp en te basant sur le pdf que je t'ai donné au début qui explique dailleurs la leture de fichiers et explique moi pas à pas comment t'as fait.

@@ -1,4 +1,4 @@
--- cr�ation du sch�ma 
+-- création du schéma 
 CREATE SCHEMA  "CTRL_capitainerie";
 SET search_path="CTRL_capitainerie";
 
@@ -185,8 +185,8 @@ INSERT INTO AGENT (CODEAG, NOMAG, ADRAG, VILLEAG, CPAG, TELAG, FAXAG) VALUES ( 4
 INSERT INTO AGENT (CODEAG, NOMAG, ADRAG, VILLEAG, CPAG, TELAG, FAXAG) VALUES ( 5, 'GAL',  '147 rue de Vaugirard',  'PARIS', 75015, '01-24-25-69-69', '01-24-25-69-96');
 INSERT INTO AGENT (CODEAG, NOMAG, ADRAG, VILLEAG, CPAG, TELAG, FAXAG) VALUES ( 6, 'CHAMBON', 'ZI de la Croix Bleue',  'VERGNOLLES',  84524, '04-56-52-69-69', '04-56-52-69-96');
 INSERT INTO AGENT (CODEAG, NOMAG, ADRAG, VILLEAG, CPAG, TELAG, FAXAG) VALUES ( 7, 'DUQUESNAY', '113 avenue Mozart',  'Marseille', 13002, '04-15-15-69-69', '04-15-15-69-96');
-INSERT INTO AGENT (CODEAG, NOMAG, ADRAG, VILLEAG, CPAG, TELAG, FAXAG) VALUES ( 8, 'CHEVALLIER-CHANTEPIE','44 rue du G�n�ral Michel Bizot',  'PARIS', 75012 , '01-65-65-69-69', '01-65-65-69-96');
--- initialisation de la valeur du compteur de s�quence
+INSERT INTO AGENT (CODEAG, NOMAG, ADRAG, VILLEAG, CPAG, TELAG, FAXAG) VALUES ( 8, 'CHEVALLIER-CHANTEPIE','44 rue du Général Michel Bizot',  'PARIS', 75012 , '01-65-65-69-69', '01-65-65-69-96');
+-- initialisation de la valeur du compteur de séquence
 select setval('agent_codeag_seq',8);
 
 
@@ -194,29 +194,29 @@ select setval('agent_codeag_seq',8);
 -- Contenu de la table 'ARMATEUR'
 INSERT INTO ARMATEUR (NUM_ARMAT, NOM_ARMAT, ADR_ARMAT, VILLE_ARMAT, CP_ARMAT, PAYS_ARMAT) VALUES (1, 'Zorba', '1 place des Oliviers', 'Marseille', '13000', 'France');
 INSERT INTO ARMATEUR (NUM_ARMAT, NOM_ARMAT, ADR_ARMAT, VILLE_ARMAT, CP_ARMAT, PAYS_ARMAT) VALUES (2, 'ARMATEUR de France', '5 rue du port', 'Brest', '29200', 'France');
-INSERT INTO ARMATEUR (NUM_ARMAT, NOM_ARMAT, ADR_ARMAT, VILLE_ARMAT, CP_ARMAT, PAYS_ARMAT) VALUES (3, 'Olympe', 'place ronde', 'Ath�nes', '00000', 'Gr�ce');
--- initialisation de la valeur du compteur de s�quence
+INSERT INTO ARMATEUR (NUM_ARMAT, NOM_ARMAT, ADR_ARMAT, VILLE_ARMAT, CP_ARMAT, PAYS_ARMAT) VALUES (3, 'Olympe', 'place ronde', 'Athènes', '00000', 'Gréce');
+-- initialisation de la valeur du compteur de séquence
 select setval('armateur_num_armat_seq',3);
 
 -- -------------------------------------------------------- 
 -- Contenu de la table 'BATEAU'
 INSERT INTO BATEAU (NUMBAT, NUM_ARMAT, NOMBAT, TONNAGE, LONGUEURBAT, TIRANTEAU) VALUES (1, 1, 'NORSTONE', 45, 120, 18);
 INSERT INTO BATEAU (NUMBAT, NUM_ARMAT, NOMBAT, TONNAGE, LONGUEURBAT, TIRANTEAU) VALUES (2, 2, 'Mouette', 14, 25, 6);
-INSERT INTO BATEAU (NUMBAT, NUM_ARMAT, NOMBAT, TONNAGE, LONGUEURBAT, TIRANTEAU) VALUES (3, 2, 'Oc�an', 20, 80, 10);
+INSERT INTO BATEAU (NUMBAT, NUM_ARMAT, NOMBAT, TONNAGE, LONGUEURBAT, TIRANTEAU) VALUES (3, 2, 'Océan', 20, 80, 10);
 INSERT INTO BATEAU (NUMBAT, NUM_ARMAT, NOMBAT, TONNAGE, LONGUEURBAT, TIRANTEAU) VALUES (4, 3, 'Tahiti', 8, 45, 12);
 INSERT INTO BATEAU (NUMBAT, NUM_ARMAT, NOMBAT, TONNAGE, LONGUEURBAT, TIRANTEAU) VALUES (5, 1, 'Erikaka', 250, 190, 30);
--- initialisation de la valeur du compteur de s�quence
+-- initialisation de la valeur du compteur de séquence
 select setval('bateau_numbat_seq',5);
 
 -- --------------------------------------------------------
 -- Contenu de la table 'FRET'
-INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (1, 'C�r�ale');
-INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (2, 'Produits p�troliers');
+INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (1, 'Céréale');
+INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (2, 'Produits pétroliers');
 INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (3, 'Acier');
 INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (4, 'Nickel');
 INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (5, 'Bois');
 INSERT INTO FRET (CODETYPEF, LIBFRET) VALUES (6, 'Voiture');
--- initialisation de la valeur du compteur de s�quence
+-- initialisation de la valeur du compteur de séquence
 select setval('fret_codetypef_seq',6);
 
 -- --------------------------------------------------------
@@ -244,7 +244,7 @@ INSERT INTO EMPLACEMENT (NUMEMP, CODETYPEF, NOMEMP, LONGUEUREMP, TIRANTEAUMAX, T
 INSERT INTO EMPLACEMENT (NUMEMP, CODETYPEF, NOMEMP, LONGUEUREMP, TIRANTEAUMAX, TARIFJOUR) VALUES (9, 6, 'B3', 175, 18, 155);
 INSERT INTO EMPLACEMENT (NUMEMP, CODETYPEF, NOMEMP, LONGUEUREMP, TIRANTEAUMAX, TARIFJOUR) VALUES (10, 4, 'B4', 125, 15, 300);
 
--- initialisation de la valeur du compteur de s�quence
+-- initialisation de la valeur du compteur de séquence
 select setval('emplacement_numemp_seq',10);
 
 -- --------------------------------------------------------
@@ -253,59 +253,47 @@ INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVE
 INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (2, 4, 3, 1, '2008-04-21 00:00:00', 3, 'Angleterre', 'Gabon');
 INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (3, 3, 4, 2, '2008-05-25 00:00:00', 15, 'France', 'Canada');
 INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (4, 2, 2, 1, '2008-03-25 00:00:00', 2, 'Islande', 'Australie');
-INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (5, 1, 2, 2, '2008-06-05 00:00:00', 5, 'Su�de', 'Nouvelle Z�lande');
-INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (6, 1, 3, 1, '2008-06-02 00:00:00', 5,'Gr�ce', 'Russie');
+INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (5, 1, 2, 2, '2008-06-05 00:00:00', 5, 'Suède', 'Nouvelle Zélande');
+INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (6, 1, 3, 1, '2008-06-02 00:00:00', 5,'Gréce', 'Russie');
 INSERT INTO SEJOUR (NUMSEJ, NUMEMP, NUMBAT, CODEAG, DATEARRIVEE, DUREESEJ, PROVENANCE, DESTINATION) VALUES (7, 3, 2, 2, '2008-06-15 00:00:00', 6, 'Espagne', 'Mexique');
--- initialisation de la valeur du compteur de s�quence
+-- initialisation de la valeur du compteur de séquence
 select setval('sejour_numsej_seq',7);
 
+--4) Nom du bateau qui a séjourné le plus longtemps (durée cumulée) dans le port ;
+SELECT B.NOMBAT
+FROM BATEAU B
+WHERE B.NUMBAT = (SELECT NUMBAT
+FROM SEJOUR
+GROUP BY NUMBAT
+ORDER BY SUM(DUREESEJ) DESC
+LIMIT 1);
 
---1) Donner la liste des emplacements (numéro et nom) pouvant accueillir les bateaux d'une 
---longueur de 50m avec un tirant d'eau de 15m.
-select NUMEMP, NOMEMP
-from emplacement
-where longueuremp >= 50 and tiranteaumax >= 15
+--5) Toutes les informations de l'emplacement le plus long ;
+SELECT *
+FROM EMPLACEMENT
+WHERE LONGUEUREMP = (SELECT MAX(LONGUEUREMP)
+FROM EMPLACEMENT);    
 
---2) Donner la liste des emplacements disposant d'un tirant d'eau et d'une longueur 
---suffisant pour accueillir le bateau nommé NORSTONE (nom de l'emplacement, 
---longueur, tirant d'eau maximum) ;
-select E.NOMEMP, E.LONGUEUREMP, E.TIRANTEAUMAX
-from emplacement E, bateau B
-where B.NOMBAT = 'NORSTONE'
-and E.LONGUEUREMP >= B.LONGUEURBAT
-and E.TIRANTEAUMAX >= B.TIRANTEAUBAT;
+--15) Donnez le bateau qui a transporté le moins de fret, quel que soit le fret, en effet un bateau a pu
+--transporter plusieurs type de fret, par exemple le bateau Erikaka a transporté 256 tonnes de Produits
+--pétroliers et 3456 tonnes de Bois, on veut donc connaitre celui qui a transporté la plus petite quantité
+--de fret cumulé !
+SELECT B.NOMBAT
+FROM BATEAU B
+WHERE B.NUMBAT = (SELECT NUMBAT
+FROM TRANSPORTER
+GROUP BY NUMBAT
+ORDER BY SUM(QTEFRET) ASC
+LIMIT 1);
 
-ou
+--14) Donnez le nombre d’emplacements par fret (libfret), en effet un emplacement est prévu pour accueillir
+--un seul type de fret, on veut donc connaitre le nombre d’emplacements qui peuvent accueillir chaque
+--type de fret !
+SELECT LIBFRET, COUNT(NUMEMP) AS NOMBRE_EMPLACEMENTS
+FROM FRET F
+LEFT JOIN EMPLACEMENT E ON F.CODETYPEF = E.CODETYPEF
+GROUP BY F.LIBFRET;  
 
-select nomemp, longueuremp, tiranteaumax
-from emplacement 
-where longueuremp >= (select longueurbat
-                      from bateau
-                      where nombat = 'NORSTONE')
-and tiranteaumax >= (select tiranteau
-                     from bateau
-                     where nombat = 'NORSTONE' )
 
-ou
-select nomemp, longueuremp, tiranteaumax 
-from emplacement join bateau on (longueuremp >= longueurbat and tiranteaumax >= tiranteau)
-where nombat = 'NORSTONE';  
-
---3) Donner le nom des agents qui ne gèrent aucun séjour ;  
-select nomag
-from agent a left outer join sejour s on a.codeag= s.codeag
-where numsej is NULL
-order by 1;
-
-ou
-select nomag
-from agent
-where codeag not in (select distinct codeag from sejour);
-
-ou
-select nomag
-from agent
-where not exists (select * from sejour where agent.codeag = sejour.codeag);
-
---4) Donner le nom du bateau qui a séjourné le plus longtemps (durée cumulée) dans le 
---port; 
+	  
+	
