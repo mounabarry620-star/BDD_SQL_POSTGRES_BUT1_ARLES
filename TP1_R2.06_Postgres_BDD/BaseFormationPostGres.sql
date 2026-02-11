@@ -1,4 +1,4 @@
--- Base de données: `Formation`
+-- Base de donnï¿½es: `Formation`
 --------------------------------------------------------
 
 
@@ -53,7 +53,7 @@ CREATE TABLE formation (
   nbheures  int default '0',
   niveau varchar(50) default NULL,
   PRIMARY KEY  (id_formation)
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -93,10 +93,10 @@ CREATE TABLE inscrire (
 INSERT INTO formateur (id_formateur, nom_formateur, prenom_formateur) VALUES (1, 'Legrand', 'Sarah');
 INSERT INTO formateur (id_formateur, nom_formateur, prenom_formateur) VALUES (2, 'Cancel', 'Christophe');
 INSERT INTO formateur (id_formateur, nom_formateur, prenom_formateur) VALUES (3, 'Maurel', 'Olivier');
-INSERT INTO formateur (id_formateur, nom_formateur, prenom_formateur) VALUES (4, 'Pleuveraux', 'François');
+INSERT INTO formateur (id_formateur, nom_formateur, prenom_formateur) VALUES (4, 'Pleuveraux', 'Franï¿½ois');
 INSERT INTO formateur (id_formateur, nom_formateur, prenom_formateur) VALUES (5, 'Carmignac', 'Laurent');
 
--- initialisation de la valeur du compteur de séquence
+-- initialisation de la valeur du compteur de sï¿½quence
 select setval('formateur_id_formateur_seq',5);
 
 --
@@ -384,7 +384,7 @@ INSERT INTO formation (id_formation, intitule_formation, nbheures, niveau) VALUE
 INSERT INTO formation (id_formation, intitule_formation, nbheures, niveau) VALUES (41, 'Developpement de pages WEB statiques et dynamiques (SPIP)', 4, 'Confirme');
 INSERT INTO formation (id_formation, intitule_formation, nbheures, niveau) VALUES (42, 'Utilisation du reseau et Utilisation de l''ordinateur Windows', 4, 'Debutant');
 
--- initialisation de la valeur du compteur de séquence
+-- initialisation de la valeur du compteur de sï¿½quence
 select setval('formation_id_formation_seq',42);
 
 --
