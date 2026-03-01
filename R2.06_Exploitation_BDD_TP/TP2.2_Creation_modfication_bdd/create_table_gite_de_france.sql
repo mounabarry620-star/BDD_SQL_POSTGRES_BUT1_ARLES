@@ -1,0 +1,80 @@
+
+-- création du schéma de données
+create schema TP_gite_de_france;
+SET search_path=TP_gite_de_france;
+
+-- Structure de la table chambres
+
+CREATE TABLE chambres (
+  NUMCH 			serial  PRIMARY KEY,
+  NUMGITE 			int NOT NULL,
+  NBLITS 			int  NOT NULL default 1,
+  NBLITDO 			int  default NULL,
+  SUPERFICIECH 		int  default NULL
+);
+
+-- Structure de la table louer
+
+CREATE TABLE louer (
+  NUMGITE 			int NOT NULL,
+  NUMCLI 			int NOT NULL,
+  DUREE 			int default 1,
+  NBPER 			int default 1,
+  DATE_DEBUT 		TIMESTAMP default CURRENT_TIMESTAMP,
+  constraint PK_louer PRIMARY KEY  (NUMGITE,NUMCLI)
+);
+
+-- Structure de la table clients
+
+CREATE TABLE clients (
+  NUMCLI 			serial PRIMARY KEY ,
+  NOMCLI 			varchar(35) NOT NULL,
+  ADRCLI 			varchar(50) NOT NULL,
+  CPCLI 			decimal(5,0) NOT NULL,
+  VILLECLI 			varchar(35) NOT NULL,
+  TEL 				varchar(20) unique NOT NULL,
+  NB_ENFANTS 		int  NOT NULL   default 0
+);
+
+-- Structure de la table facturer
+
+CREATE TABLE facturer (
+  SAISON 			varchar(10) NOT NULL,
+  NUMGITE 			int NOT NULL,
+   constraint PK_facturer PRIMARY KEY  (SAISON,NUMGITE)
+);
+
+-- Structure de la table gites
+
+CREATE TABLE gites (
+  NUMGITE serial  	PRIMARY KEY,
+  NOMGITE 			varchar(25) default NULL,
+  ADRGITE			varchar(50) default NULL,
+  CPGITE 			decimal(5,0) default NULL,
+  VILLEGITE 		varchar(35) default NULL,
+  TELGITE 			int unique default NULL,
+  DESCR 			varchar(20) NOT NULL
+);
+
+-- Structure de la table saison
+
+CREATE TABLE saison (
+  SAISON varchar(10) PRIMARY KEY
+);
+
+-- Contraintes pour la table chambres
+
+ALTER TABLE chambres
+  ADD CONSTRAINT chambres_ibfk_1 FOREIGN KEY (NUMGITE) REFERENCES gites(NUMGITE) ON UPDATE CASCADE;
+
+-- Contraintes pour la table facturer
+
+ALTER TABLE facturer
+  ADD CONSTRAINT facturer_ibfk_1 FOREIGN KEY (SAISON) REFERENCES saison (SAISON) ON UPDATE CASCADE,
+  ADD CONSTRAINT facturer_ibfk_2 FOREIGN KEY (NUMGITE) REFERENCES gites (NUMGITE) ON UPDATE CASCADE;
+
+-- Contraintes pour la table louer
+
+ALTER TABLE louer
+  ADD CONSTRAINT louer_ibfk_1 FOREIGN KEY (NUMGITE) REFERENCES gites (NUMGITE) ON UPDATE CASCADE,
+  ADD CONSTRAINT louer_ibfk_2 FOREIGN KEY (NUMCLI) REFERENCES clients (NUMCLI) ON UPDATE CASCADE;
